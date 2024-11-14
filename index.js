@@ -3,7 +3,7 @@ const app = express()
 
 
 app.post('/api/v1/:operator', (request, response) => {
-    const operator = parseFloat(request.params.operator)
+    const operator = (request.params.operator).toString
     const num1 = parseFloat(request.query.num1)
     const num2 = parseFloat(request.query.num2)
     const result = 0
