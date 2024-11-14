@@ -28,5 +28,6 @@ app.post('/api/v1/:operator', (request, response) => {
     }
 
     response.json(result)
+    
 })
 
