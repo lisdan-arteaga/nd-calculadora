@@ -2,30 +2,31 @@ const express = require('express')
 const app = express()
 
 
-app.post('/api/v1/multiplication', (request, response) => {
-    const num1 = request.query.num1
-    const num2 = request.query.num2
-    const result = num1 * num2
+app.post('/api/v1/:operator', (request, response) => {
+    const operator = parseFloat(request.params.operator)
+    const num1 = parseFloat(request.query.num1)
+    const num2 = parseFloat(request.query.num2)
+    const result = 0
+    switch (operator) {
+        case value = "multiplication":
+            result = num1 * num2
+            break;
+
+        case value = "division":
+            result = num1 / num2
+            break;
+
+        case value = "plus":
+            result = num1 + num2
+            break;
+
+        case value = "minus":
+            result = num1 - num2
+            break;
+
+        default: throw new Error("Operación no válida")
+    }
+
     response.json(result)
 })
 
-app.post('/api/v1/division', (request, response) => {
-    const num1 = request.query.num1
-    const num2 = request.query.num2
-    const result = num1 / num2
-    response.json(result)
-})
-
-app.post('/api/v1/plus', (request, response) => {
-    const num1 = request.query.num1
-    const num2 = request.query.num2
-    const result = num1 + num2
-    response.json(result)
-})
-
-app.post('/api/v1/minus', (request, response) => {
-    const num1 = request.query.num1
-    const num2 = request.query.num2
-    const result = num1 - num2
-    response.json(result)
-})
