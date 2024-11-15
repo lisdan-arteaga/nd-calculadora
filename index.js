@@ -2,10 +2,10 @@ const express = require('express')
 const app = express()
 
 
-app.post('/api/v1/:operator', (request, response) => {
+app.post('/api/v1/result/:num1/:num2/:operator', (request, response) => {
     const operator = (request.params.operator).toString
-    const num1 = parseFloat(request.query.num1)
-    const num2 = parseFloat(request.query.num2)
+    const num1 = parseInt(request.params.num1)
+    const num2 = parseInt(request.params.num2)
     const result = 0
     switch (operator) {
         case value = "multiplication":
