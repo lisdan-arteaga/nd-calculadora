@@ -1,6 +1,12 @@
 const express = require('express')
 const app = express()
 
+const unknownEndpoint = (request, response) => {
+    response.status(404).send({ error: 'unknown endpoint' })
+  }
+  
+  app.use(unknownEndpoint)
+
 
 app.post('/api/v1/result/:num1/:num2/:operator', (request, response) => {
     const operator = (request.params.operator).toString
@@ -24,7 +30,7 @@ app.post('/api/v1/result/:num1/:num2/:operator', (request, response) => {
             result = num1 - num2
             break;
 
-        default: throw new Error("Operación no válida")
+        default: unknownEndpoint
     }
 
     response.json(result)
