@@ -10,6 +10,16 @@ const unknownEndpoint = (request, response) => {
   
   app.use(unknownEndpoint)
 
+let ok = [
+    {
+      availavle: "App is easy",
+      status: "ok"
+    },
+]
+
+app.get('/', (request, response) => {
+    response.json(ok)
+})
 
 app.post('/api/v1/result/:num1/:num2/:operator', (request, response) => {
     const operator = (request.params.operator).toString
@@ -17,19 +27,19 @@ app.post('/api/v1/result/:num1/:num2/:operator', (request, response) => {
     const num2 = parseInt(request.params.num2)
     const result = 0
     switch (operator) {
-        case value = "multiplication":
+        case "multiplication":
             result = num1 * num2
             break;
 
-        case value = "division":
+        case "division":
             result = num1 / num2
             break;
 
-        case value = "plus":
+        case "plus":
             result = num1 + num2
             break;
 
-        case value = "minus":
+        case "minus":
             result = num1 - num2
             break;
 
