@@ -1,5 +1,8 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
+
+app.use(cors())
 
 const unknownEndpoint = (request, response) => {
     response.status(404).send({ error: 'unknown endpoint' })
@@ -37,3 +40,7 @@ app.post('/api/v1/result/:num1/:num2/:operator', (request, response) => {
     
 })
 
+const PORT = process.env.PORT || 3001
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
+})
