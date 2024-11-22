@@ -14,7 +14,7 @@ let ok = [
     {
       availavle: "App is easy",
       status: "ok"
-    },
+    }
 ]
 
 app.get('/', (request, response) => {
