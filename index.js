@@ -28,23 +28,19 @@ app.post('/api/v1/result/:num1/:num2/:operator', (request, response) => {
     switch (operator) {
         case "multiplication":
             result = num1 * num2
-            response.json(result)
-            break;
+            return res.status(200).json(result);
 
         case "division":
             result = num1 / num2
-            response.json(result)
-            break;
+            return res.status(200).json(result);
 
         case "plus":
             result = num1 + num2
-            response.json(result)
-            break;
+            return res.status(200).json(result);
 
         case "minus":
             result = num1 - num2
-            response.json(result)
-            break;
+            return res.status(200).json(result);
 
         default: unknownEndpoint
     }
