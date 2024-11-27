@@ -3,22 +3,21 @@ const app = express()
 const cors = require('cors')
 
 app.use(cors())
+app.use(express.json())
 
 const unknownEndpoint = (request, response) => {
     response.status(404).send({ error: 'unknown endpoint' })
-  }
-  
-  app.use(unknownEndpoint)
+}
 
-let ok = [
-    {
-      availavle: "App is easy",
-      status: "ok"
-    }
-]
+
+
+
 
 app.get('/', (request, response) => {
-    response.json(ok)
+    response.json({
+        availavle: "App is easy",
+        status: "ok"
+    })
 })
 
 app.post('/api/v1/result/:num1/:num2/:operator', (request, response) => {
@@ -47,10 +46,10 @@ app.post('/api/v1/result/:num1/:num2/:operator', (request, response) => {
     }
 
     response.json(result)
-    
+
 })
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+    console.log(`Server running on port ${PORT}`)
 })
