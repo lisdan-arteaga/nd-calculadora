@@ -5,13 +5,6 @@ const cors = require('cors')
 app.use(cors())
 app.use(express.json())
 
-const unknownEndpoint = (request, response) => {
-    response.status(404).send({ error: 'unknown endpoint' })
-}
-
-
-
-
 
 app.get('/', (request, response) => {
     response.json({
@@ -20,33 +13,40 @@ app.get('/', (request, response) => {
     })
 })
 
-app.post('/api/v1/result/:num1/:num2/:operator', (request, response) => {
-    const operator = (request.params.operator).toString
-    const num1 = parseInt(request.params.num1)
-    const num2 = parseInt(request.params.num2)
-    let result = 0
-    switch (operator) {
-        case "multiplication":
-            result = num1 * num2
-            return res.status(200).json(result);
+app.post('/api/v1/result/:num1/:num2/:operator', (req, res) => {
+    const { num1, num2, operator } = req.params;
 
-        case "division":
-            result = num1 / num2
-            return res.status(200).json(result);
+    operator.toString
+    const parsedNum1 = parseInt(num1);
+    const parsedNum2 = parseInt(num2);
 
-        case "plus":
-            result = num1 + num2
-            return res.status(200).json(result);
-
-        case "minus":
-            result = num1 - num2
-            return res.status(200).json(result);
-
-        default: unknownEndpoint
+    if (isNaN(parsedNum1) || isNaN(parsedNum2)) {
+        return res.status(400).json({ error: 'Los parámetros numéricos deben ser válidos.' });
     }
 
-    
+    let result;
 
+    switch (operator) {
+        case "multiplication":
+            result = parsedNum1 * parsedNum2;
+            break;
+        case "division":
+            if (parsedNum2 === 0) {
+                return res.status(400).json({ error: 'Is not posible divide by cero.' });
+            }
+            result = parsedNum1 / parsedNum2;
+            break;
+        case "plus":
+            result = parsedNum1 + parsedNum2;
+            break;
+        case "minus":
+            result = parsedNum1 - parsedNum2;
+            break;
+        default:
+            return res.status(400).json({ error: 'Unknown operator. Use: multiplication, division, plus o minus.' });
+    }
+
+    return res.status(200).json({ result: result });
 })
 
 const PORT = process.env.PORT || 3001
