@@ -8,7 +8,7 @@ app.use(express.json())
 
 app.get('/', (request, response) => {
     response.json({
-        availavle: "App is easy",
+        available: "App is ready",
         status: "ok"
     })
 })
